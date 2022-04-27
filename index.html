@@ -7,7 +7,19 @@
 </head>
 
 <body>
-
+  <form>
+    <label for="search-bar">GIF Keywords: </label>
+    <input type="text" name="search-bar" id="search-bar">
+    <div>
+      <label for="key">API Key: </label>
+      <input type="password" name="key" id="key">
+      <button id="record-key">Record Key</button>
+      <button id="delete-key">Delete Key</button>
+    </div>
+    <input type="submit" value="Search">
+  </form>
+  <button id="clear-gifs">Clear All Gifs</button>
+  <div id="gif-container"></div>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.js"></script>
 <script src="app.js"></script>
