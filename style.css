@@ -6,18 +6,19 @@ html {
   text-align: center;
 }
 
-form{
+form {
   display: flex;
   justify-content: center;
 }
 
-#submit{
+#submit {
   margin-left: 0.5em;
-  background-color: green;
+  background-color: rgb(8, 123, 8);
 }
 
-.colored-button{
-  color: white;
+.colored-button {
+  color: rgb(227, 227, 227);
+  text-shadow: 0 0 1rem black;
   border-radius: 0.25rem;
   padding: 0.5rem;
   border-style: none;
@@ -25,20 +26,21 @@ form{
   margin: 0.2rem;
 }
 
-.colored-button:hover{
-  filter: brightness(130%);
+.colored-button:hover {
+  filter: brightness(115%);
 }
 
-.colored-button:active{
+.colored-button:active {
   filter: brightness(75%);
   box-shadow: 0.05rem 0.1rem rgb(16, 16, 16);
   transform: translate(0.05rem, 0.1rem);
 }
 
-#delete-key, #clear-gifs{
-  background-color: red;
+#delete-key,
+#clear-gifs {
+  background-color: rgb(183, 24, 21);
 }
 
 #record-key {
-  background-color: blue;
+  background-color: rgb(22, 22, 195);
 }
