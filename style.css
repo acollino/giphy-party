@@ -25,6 +25,16 @@ form{
   margin: 0.2rem;
 }
 
+.colored-button:hover{
+  filter: brightness(130%);
+}
+
+.colored-button:active{
+  filter: brightness(75%);
+  box-shadow: 0.05rem 0.1rem rgb(16, 16, 16);
+  transform: translate(0.05rem, 0.1rem);
+}
+
 #delete-key, #clear-gifs{
   background-color: red;
 }
