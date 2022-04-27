@@ -43,8 +43,11 @@ if (localStorage.getItem("key")) {
   keyTextBar.value = localStorage.getItem("key");
 }
 
-function checkInputs() {
-  return Boolean(keyTextBar.value && searchBar.value);
+function checkInputs(...args) {
+  if (args.length === 0) {
+    return false;
+  }
+  return args.reduce( (acc, el) => acc && el, true)
 }
 
 async function addRandomGif(array) {
