@@ -11,7 +11,7 @@ searchBar.setCustomValidity("No unique Gifs found for this term!");
 
 async function makeGiphyRequest(searchItem, apiKey) {
   try {
-    let giphyResponse = await axios.get("http://api.giphy.com/v1/gifs/random", {
+    let giphyResponse = await axios.get("https://api.giphy.com/v1/gifs/random", {
       params: { tag: searchItem, api_key: apiKey, rating: "pg-13" },
     });
     giphyResponse = await checkForUniqueGif(giphyResponse);
@@ -24,7 +24,7 @@ async function makeGiphyRequest(searchItem, apiKey) {
 async function checkForUniqueGif(gif) {
   let gifInfo = gif;
   if (gifIDSet.has(gifInfo.data.data.id)) {
-    gifInfo = await axios.get("http://api.giphy.com/v1/gifs/random", {
+    gifInfo = await axios.get("https://api.giphy.com/v1/gifs/random", {
       params: { tag: searchItem, api_key: apiKey, rating: "pg-13" },
     });
   }
