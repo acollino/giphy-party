@@ -48,18 +48,17 @@ deleteKeyButton.addEventListener("click", function (evt) {
   localStorage.removeItem("key");
 });
 
-submit.addEventListener("click", async function (evt) {
-  evt.preventDefault();
-  if (checkInputs()) {
-    let gifInfo = await makeGiphyRequest(searchBar.value, keyTextBar.value);
-    if (gifInfo) {
-      addRandomGif(gifInfo.data.data);
-    }
+submit.addEventListener("click", submitInfoToGiphy);
+
+document.addEventListener("keypress", function (evt) {
+  if (evt.key === "Enter") {
+    submitInfoToGiphy(evt);
   }
 });
 
 clearGifButton.addEventListener("click", function (evt) {
   gifContainer.textContent = "";
+  searchBar.value = "";
   gifIDSet.clear();
 });
 
@@ -75,4 +74,14 @@ async function addRandomGif(gifInfo) {
   let gif = document.createElement("img");
   gif.src = gifInfo.images.original.url;
   gifContainer.append(gif);
+}
+
+async function submitInfoToGiphy(evt) {
+  evt.preventDefault();
+  if (checkInputs()) {
+    let gifInfo = await makeGiphyRequest(searchBar.value, keyTextBar.value);
+    if (gifInfo) {
+      addRandomGif(gifInfo.data.data);
+    }
+  }
 }
