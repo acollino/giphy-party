@@ -1,0 +1,46 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100%;
+  background-image: linear-gradient(rgb(71, 71, 71), rgb(34, 34, 34) 15%);
+  color: white;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+}
+
+#submit {
+  margin-left: 0.5em;
+  background-color: rgb(8, 123, 8);
+}
+
+.colored-button {
+  color: rgb(227, 227, 227);
+  text-shadow: 0 0 1rem black;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  border-style: none;
+  box-shadow: 0.1rem 0.2rem rgb(16, 16, 16);
+  margin: 0.2rem;
+}
+
+.colored-button:hover {
+  filter: brightness(115%);
+}
+
+.colored-button:active {
+  filter: brightness(75%);
+  box-shadow: 0.05rem 0.1rem rgb(16, 16, 16);
+  transform: translate(0.05rem, 0.1rem);
+}
+
+#delete-key,
+#clear-gifs {
+  background-color: rgb(183, 24, 21);
+}
+
+#record-key {
+  background-color: rgb(22, 22, 195);
+}
