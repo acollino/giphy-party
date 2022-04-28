@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Giphy Party!</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>Giphy Party!</title>
-</head>
-
-<body>
-  <form>
-    <label for="search-bar">GIF Keywords: </label>
-    <input type="text" name="search-bar" id="search-bar">
-    <div>
-      <label for="key">API Key: </label>
-      <input type="password" name="key" id="key">
-      <button id="record-key">Record Key</button>
-      <button id="delete-key">Delete Key</button>
-    </div>
-    <input type="submit" value="Search">
-  </form>
-  <button id="clear-gifs">Clear All Gifs</button>
-  <div id="gif-container"></div>
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.js"></script>
-<script src="app.js"></script>
-</body>
-
+  <body>
+    <h1>GIPHY PARTY</h1>
+    <form>
+      <div>
+        <label for="search-bar">GIF Keywords: </label>
+        <input type="text" name="search-bar" id="search-bar" />
+        <div>
+          <label for="key">API Key: </label>
+          <input type="password" name="key" id="key" />
+          <button id="record-key" class="colored-button">Record Key</button>
+          <button id="delete-key" class="colored-button">Delete Key</button>
+        </div>
+      </div>
+      <input type="submit" id="submit" value="Search" class="colored-button" />
+    </form>
+    <button id="clear-gifs" class="colored-button">Clear All Gifs</button>
+    <div id="gif-container"></div>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="app.js"></script>
+  </body>
 </html>
