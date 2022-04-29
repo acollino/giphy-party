@@ -7,6 +7,8 @@ const clearGifButton = document.querySelector("#clear-gifs");
 const gifContainer = document.querySelector("#gif-container");
 const gifIDSet = new Set();
 
+searchBar.setCustomValidity("No unique Gifs found for this term!");
+
 async function makeGiphyRequest(searchItem, apiKey) {
   try {
     let giphyResponse = await axios.get("https://api.giphy.com/v1/gifs/random", {
@@ -27,12 +29,10 @@ async function checkForUniqueGif(gif) {
     });
   }
   if (gifIDSet.has(gifInfo.data.data.id) || gifInfo.data.data.length === 0) {
-    searchBar.setCustomValidity("No unique Gifs found for this term!");
     searchBar.reportValidity();
     gifInfo = null;
   }
   else {
-    searchBar.setCustomValidity("");
     gifIDSet.add(gif.data.data.id);
   }
   return gifInfo;
@@ -58,7 +58,6 @@ document.addEventListener("keypress", function (evt) {
 
 clearGifButton.addEventListener("click", function (evt) {
   gifContainer.textContent = "";
-  searchBar.setCustomValidity("");
   searchBar.value = "";
   gifIDSet.clear();
 });
