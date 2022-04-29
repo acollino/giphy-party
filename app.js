@@ -32,11 +32,14 @@ async function checkForUniqueGif(gif) {
     gifInfo = null;
   }
   else {
-    searchBar.setCustomValidity("");
     gifIDSet.add(gif.data.data.id);
   }
   return gifInfo;
 }
+
+searchBar.addEventListener("input", function (evt) {
+  searchBar.setCustomValidity("");
+})
 
 recordKeyButton.addEventListener("click", function (evt) {
   if (keyTextBar.checkValidity()) {
@@ -56,7 +59,6 @@ submit.addEventListener("click", submitInfoToGiphy);
 
 clearGifButton.addEventListener("click", function (evt) {
   gifContainer.textContent = "";
-  searchBar.setCustomValidity("");
   searchBar.value = "";
   gifIDSet.clear();
 });
