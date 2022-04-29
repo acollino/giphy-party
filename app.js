@@ -9,9 +9,12 @@ const gifIDSet = new Set();
 
 async function makeGiphyRequest(searchItem, apiKey) {
   try {
-    let giphyResponse = await axios.get("https://api.giphy.com/v1/gifs/random", {
-      params: { tag: searchItem, api_key: apiKey, rating: "pg-13" },
-    });
+    let giphyResponse = await axios.get(
+      "https://api.giphy.com/v1/gifs/random",
+      {
+        params: { tag: searchItem, api_key: apiKey, rating: "pg-13" },
+      }
+    );
     giphyResponse = await checkForUniqueGif(giphyResponse);
     return giphyResponse;
   } catch (error) {
@@ -30,8 +33,7 @@ async function checkForUniqueGif(gif) {
     searchBar.setCustomValidity("No unique Gifs found for this term!");
     searchBar.reportValidity();
     gifInfo = null;
-  }
-  else {
+  } else {
     gifIDSet.add(gif.data.data.id);
   }
   return gifInfo;
@@ -39,13 +41,12 @@ async function checkForUniqueGif(gif) {
 
 searchBar.addEventListener("input", function (evt) {
   searchBar.setCustomValidity("");
-})
+});
 
 recordKeyButton.addEventListener("click", function (evt) {
   if (keyTextBar.checkValidity()) {
     localStorage.setItem("key", keyTextBar.value);
-  }
-  else {
+  } else {
     keyTextBar.reportValidity();
   }
 });
