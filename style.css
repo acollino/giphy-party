@@ -7,12 +7,10 @@ html {
 }
 
 form {
-  display: flex;
-  justify-content: center;
+  margin-bottom: 2rem;
 }
 
 #submit {
-  margin-left: 0.5em;
   background-color: rgb(8, 123, 8);
 }
 
@@ -23,7 +21,6 @@ form {
   padding: 0.5rem;
   border-style: none;
   box-shadow: 0.1rem 0.2rem rgb(16, 16, 16);
-  margin: 0.2rem;
 }
 
 .colored-button:hover {
@@ -43,4 +40,18 @@ form {
 
 #record-key {
   background-color: rgb(22, 22, 195);
+}
+
+input[type="text"],
+input[type="password"] {
+  box-sizing: border-box;
+  height: 2.1rem;
+  border-radius:  0.25rem;
+  border-style: none;
+  padding: 0.5rem;
+  box-shadow: 0.1rem 0.1rem rgb(16, 16, 16);
+}
+
+.form-row{
+  margin: 0.5rem 0;
 }
