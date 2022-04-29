@@ -39,22 +39,20 @@ async function checkForUniqueGif(gif) {
 }
 
 recordKeyButton.addEventListener("click", function (evt) {
-  evt.preventDefault();
-  localStorage.setItem("key", keyTextBar.value);
+  if (keyTextBar.checkValidity()) {
+    localStorage.setItem("key", keyTextBar.value);
+  }
+  else {
+    keyTextBar.reportValidity();
+  }
 });
 
 deleteKeyButton.addEventListener("click", function (evt) {
-  evt.preventDefault();
   localStorage.removeItem("key");
+  keyTextBar.value = "";
 });
 
 submit.addEventListener("click", submitInfoToGiphy);
-
-document.addEventListener("keypress", function (evt) {
-  if (evt.key === "Enter") {
-    submitInfoToGiphy(evt);
-  }
-});
 
 clearGifButton.addEventListener("click", function (evt) {
   gifContainer.textContent = "";
