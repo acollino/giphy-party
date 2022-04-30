@@ -7,6 +7,8 @@ const clearGifButton = document.querySelector("#clear-gifs");
 const gifContainer = document.querySelector("#gif-container");
 const gifIDSet = new Set();
 
+searchBar.setCustomValidity("No unique Gifs found for this term!");
+
 async function makeGiphyRequest(searchItem, apiKey) {
   try {
     let giphyResponse = await axios.get(
@@ -30,7 +32,6 @@ async function checkForUniqueGif(gif) {
     });
   }
   if (gifIDSet.has(gifInfo.data.data.id) || gifInfo.data.data.length === 0) {
-    searchBar.setCustomValidity("No unique Gifs found for this term!");
     searchBar.reportValidity();
     gifInfo = null;
   } else {
