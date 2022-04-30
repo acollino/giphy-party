@@ -10,16 +10,39 @@
     <h1>GIPHY PARTY</h1>
     <form>
       <div class="form-row">
-        <!-- <label for="search-bar">GIF Keywords: </label> -->
-        <input type="text" name="search-bar" id="search-bar" placeholder="Enter a search term"/>
-        <button id="clear-gifs" class="colored-button">Remove Images</button>
-        <input type="submit" id="submit" value="Search Giphy" class="colored-button" />
+        <input
+          type="text"
+          name="search-bar"
+          id="search-bar"
+          placeholder="Enter a search term"
+          autofocus
+        />
+        <button id="clear-gifs" class="colored-button" type="button">
+          Remove Images
+        </button>
+        <input
+          type="submit"
+          id="submit"
+          value="Search Giphy"
+          class="colored-button"
+        />
       </div>
       <div class="form-row">
-        <label for="key">API Key: </label>
-        <input type="password" name="key" id="key" />
-        <button id="record-key" class="colored-button">Record Key</button>
-        <button id="delete-key" class="colored-button">Delete Key</button>
+        <input
+          type="password"
+          name="key"
+          id="key"
+          placeholder="Enter a valid GIPHY API key"
+          size="25"
+          required
+          autocomplete="off"
+        />
+        <button id="record-key" class="colored-button" type="button">
+          Record Key
+        </button>
+        <button id="delete-key" class="colored-button" type="button">
+          Delete Key
+        </button>
       </div>
     </form>
     <div id="gif-container"></div>

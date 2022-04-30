@@ -11,9 +11,12 @@ searchBar.setCustomValidity("No unique Gifs found for this term!");
 
 async function makeGiphyRequest(searchItem, apiKey) {
   try {
-    let giphyResponse = await axios.get("https://api.giphy.com/v1/gifs/random", {
-      params: { tag: searchItem, api_key: apiKey, rating: "pg-13" },
-    });
+    let giphyResponse = await axios.get(
+      "https://api.giphy.com/v1/gifs/random",
+      {
+        params: { tag: searchItem, api_key: apiKey, rating: "pg-13" },
+      }
+    );
     giphyResponse = await checkForUniqueGif(giphyResponse);
     return giphyResponse;
   } catch (error) {
@@ -31,30 +34,30 @@ async function checkForUniqueGif(gif) {
   if (gifIDSet.has(gifInfo.data.data.id) || gifInfo.data.data.length === 0) {
     searchBar.reportValidity();
     gifInfo = null;
-  }
-  else {
+  } else {
     gifIDSet.add(gif.data.data.id);
   }
   return gifInfo;
 }
 
+searchBar.addEventListener("input", function (evt) {
+  searchBar.setCustomValidity("");
+});
+
 recordKeyButton.addEventListener("click", function (evt) {
-  evt.preventDefault();
-  localStorage.setItem("key", keyTextBar.value);
+  if (keyTextBar.checkValidity()) {
+    localStorage.setItem("key", keyTextBar.value);
+  } else {
+    keyTextBar.reportValidity();
+  }
 });
 
 deleteKeyButton.addEventListener("click", function (evt) {
-  evt.preventDefault();
   localStorage.removeItem("key");
+  keyTextBar.value = "";
 });
 
 submit.addEventListener("click", submitInfoToGiphy);
-
-document.addEventListener("keypress", function (evt) {
-  if (evt.key === "Enter") {
-    submitInfoToGiphy(evt);
-  }
-});
 
 clearGifButton.addEventListener("click", function (evt) {
   gifContainer.textContent = "";
