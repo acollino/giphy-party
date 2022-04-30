@@ -21,6 +21,7 @@ form {
   padding: 0.5rem;
   border-style: none;
   box-shadow: 0.1rem 0.2rem rgb(16, 16, 16);
+  font-size: 1rem;
 }
 
 .colored-button:hover {
@@ -50,6 +51,7 @@ input[type="password"] {
   border-style: none;
   padding: 0.5rem;
   box-shadow: 0.1rem 0.1rem rgb(16, 16, 16);
+  font-size: 1rem;
 }
 
 .form-row{
