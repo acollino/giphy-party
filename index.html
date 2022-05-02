@@ -17,6 +17,8 @@
           placeholder="Enter a search term"
           autofocus
         />
+      </div>
+      <div class="form-row">
         <button id="clear-gifs" class="colored-button" type="button">
           Remove Images
         </button>
@@ -27,26 +29,8 @@
           class="colored-button"
         />
       </div>
-      <div class="form-row">
-        <input
-          type="password"
-          name="key"
-          id="key"
-          placeholder="Enter a valid GIPHY API key"
-          size="25"
-          required
-          autocomplete="off"
-        />
-        <button id="record-key" class="colored-button" type="button">
-          Record Key
-        </button>
-        <button id="delete-key" class="colored-button" type="button">
-          Delete Key
-        </button>
-      </div>
     </form>
     <div id="gif-container"></div>
-    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
     <script src="app.js"></script>
   </body>
