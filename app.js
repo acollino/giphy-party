@@ -1,20 +1,24 @@
 const searchBar = document.querySelector("#search-bar");
 const submit = document.querySelector("input[type=submit]");
-const keyTextBar = document.querySelector("#key");
-const recordKeyButton = document.querySelector("#record-key");
-const deleteKeyButton = document.querySelector("#delete-key");
 const clearGifButton = document.querySelector("#clear-gifs");
 const gifContainer = document.querySelector("#gif-container");
+
 const gifIDSet = new Set();
+
+const giphyKey = "Y6rG8VJyAwsgpZectHkvEPGN99o9J4oG";
+/* Typically, storing an API key in client-side code is not best-practice;
+   however, Giphy keys are expected to be used client side and are monitored
+   by Giphy for any abuses.
+*/
 
 searchBar.setCustomValidity("No unique Gifs found for this term!");
 
-async function makeGiphyRequest(searchItem, apiKey) {
+async function makeGiphyRequest(searchItem) {
   try {
     let giphyResponse = await axios.get(
       "https://api.giphy.com/v1/gifs/random",
       {
-        params: { tag: searchItem, api_key: apiKey, rating: "pg-13" },
+        params: { tag: searchItem, api_key: giphyKey, rating: "pg-13" },
       }
     );
     giphyResponse = await checkForUniqueGif(giphyResponse);
@@ -28,7 +32,7 @@ async function checkForUniqueGif(gif) {
   let gifInfo = gif;
   if (gifIDSet.has(gifInfo.data.data.id)) {
     gifInfo = await axios.get("https://api.giphy.com/v1/gifs/random", {
-      params: { tag: searchItem, api_key: apiKey, rating: "pg-13" },
+      params: { tag: searchItem, api_key: giphyKey, rating: "pg-13" },
     });
   }
   if (gifIDSet.has(gifInfo.data.data.id) || gifInfo.data.data.length === 0) {
@@ -44,19 +48,6 @@ searchBar.addEventListener("input", function (evt) {
   searchBar.setCustomValidity("");
 });
 
-recordKeyButton.addEventListener("click", function (evt) {
-  if (keyTextBar.checkValidity()) {
-    localStorage.setItem("key", keyTextBar.value);
-  } else {
-    keyTextBar.reportValidity();
-  }
-});
-
-deleteKeyButton.addEventListener("click", function (evt) {
-  localStorage.removeItem("key");
-  keyTextBar.value = "";
-});
-
 submit.addEventListener("click", submitInfoToGiphy);
 
 clearGifButton.addEventListener("click", function (evt) {
@@ -65,12 +56,8 @@ clearGifButton.addEventListener("click", function (evt) {
   gifIDSet.clear();
 });
 
-if (localStorage.getItem("key")) {
-  keyTextBar.value = localStorage.getItem("key");
-}
-
 function checkInputs() {
-  return Boolean(keyTextBar.value && searchBar.value);
+  return Boolean(searchBar.value);
 }
 
 async function addRandomGif(gifInfo) {
@@ -82,7 +69,7 @@ async function addRandomGif(gifInfo) {
 async function submitInfoToGiphy(evt) {
   evt.preventDefault();
   if (checkInputs()) {
-    let gifInfo = await makeGiphyRequest(searchBar.value, keyTextBar.value);
+    let gifInfo = await makeGiphyRequest(searchBar.value, giphyKey);
     if (gifInfo) {
       addRandomGif(gifInfo.data.data);
     }
@@ -91,7 +78,7 @@ async function submitInfoToGiphy(evt) {
 
 function resizeContent() {
   let windowSize = Math.min(window.screen.availWidth, window.innerWidth);
-  let newSize = 14 + (60000000) / (1 + (windowSize * 3715) ** 1.03);
+  let newSize = 14 + 60000000 / (1 + (windowSize * 3715) ** 1.03);
   document.querySelector("html").style.fontSize = newSize + "px";
 }
 
