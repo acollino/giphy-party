@@ -64,7 +64,8 @@ clearGifButton.addEventListener("click", function (evt) {
 async function addRandomGif(gifInfo) {
   let gif = document.createElement("img");
   gif.src = gifInfo.images.original.url;
-  gifContainer.append(gif);
+  gif.classList.add("gif-image");
+  gifContainer.prepend(gif);
 }
 
 function resizeContent() {
