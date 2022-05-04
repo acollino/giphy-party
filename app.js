@@ -48,7 +48,16 @@ searchBar.addEventListener("input", function (evt) {
   searchBar.setCustomValidity("");
 });
 
-submit.addEventListener("click", submitInfoToGiphy);
+submit.addEventListener("click", async function (evt) {
+  evt.preventDefault();
+  let checkInputs = Boolean(searchBar.value);
+  if (checkInputs) {
+    let gifInfo = await makeGiphyRequest(searchBar.value, giphyKey);
+    if (gifInfo) {
+      addRandomGif(gifInfo.data.data);
+    }
+  }
+});
 
 clearGifButton.addEventListener("click", function (evt) {
   gifContainer.textContent = "";
@@ -56,24 +65,10 @@ clearGifButton.addEventListener("click", function (evt) {
   gifIDSet.clear();
 });
 
-function checkInputs() {
-  return Boolean(searchBar.value);
-}
-
 async function addRandomGif(gifInfo) {
   let gif = document.createElement("img");
   gif.src = gifInfo.images.original.url;
   gifContainer.append(gif);
-}
-
-async function submitInfoToGiphy(evt) {
-  evt.preventDefault();
-  if (checkInputs()) {
-    let gifInfo = await makeGiphyRequest(searchBar.value, giphyKey);
-    if (gifInfo) {
-      addRandomGif(gifInfo.data.data);
-    }
-  }
 }
 
 function resizeContent() {
