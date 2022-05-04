@@ -11,8 +11,6 @@ const giphyKey = "Y6rG8VJyAwsgpZectHkvEPGN99o9J4oG";
    by Giphy for any abuses.
 */
 
-searchBar.setCustomValidity("No unique Gifs found for this term!");
-
 async function makeGiphyRequest(searchItem) {
   try {
     let giphyResponse = await axios.get(
@@ -21,27 +19,25 @@ async function makeGiphyRequest(searchItem) {
         params: { tag: searchItem, api_key: giphyKey, rating: "pg-13" },
       }
     );
-    giphyResponse = await checkForUniqueGif(giphyResponse);
-    return giphyResponse;
+    return checkForUniqueGif(giphyResponse);
   } catch (error) {
     console.log(error);
   }
 }
 
 async function checkForUniqueGif(gif) {
-  let gifInfo = gif;
-  if (gifIDSet.has(gifInfo.data.data.id)) {
-    gifInfo = await axios.get("https://api.giphy.com/v1/gifs/random", {
-      params: { tag: searchItem, api_key: giphyKey, rating: "pg-13" },
-    });
-  }
-  if (gifIDSet.has(gifInfo.data.data.id) || gifInfo.data.data.length === 0) {
+  if (gif.data.data.length === 0) {
+    searchBar.setCustomValidity("No gifs found for this search!");
     searchBar.reportValidity();
-    gifInfo = null;
-  } else {
-    gifIDSet.add(gif.data.data.id);
+    return null;
   }
-  return gifInfo;
+  if (gifIDSet.has(gif.data.data.id)) {
+    searchBar.setCustomValidity("GIPHY sent a duplicate gif!");
+    searchBar.reportValidity();
+    return null;
+  }
+  gifIDSet.add(gif.data.data.id);
+  return gif;
 }
 
 searchBar.addEventListener("input", function (evt) {
