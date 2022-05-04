@@ -59,6 +59,7 @@ clearGifButton.addEventListener("click", function (evt) {
   gifContainer.textContent = "";
   searchBar.value = "";
   gifIDSet.clear();
+  clearGifButton.disabled = true;
 });
 
 async function addRandomGif(gifInfo) {
@@ -66,6 +67,7 @@ async function addRandomGif(gifInfo) {
   gif.src = gifInfo.images.original.url;
   gif.classList.add("gif-image");
   gifContainer.prepend(gif);
+  clearGifButton.disabled = false;
 }
 
 function resizeContent() {
