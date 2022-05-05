@@ -1,9 +1,13 @@
 html {
   font-family: Arial, Helvetica, sans-serif;
   min-height: 100%;
-  background-image: linear-gradient(rgb(71, 71, 71), rgb(34, 34, 34) 15%);
+  background-image: linear-gradient(rgb(71, 71, 71), rgb(34, 34, 34) 5rem);
   color: white;
   text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
 }
 
 form {
@@ -21,15 +25,20 @@ form {
   padding: 0.5rem;
   border-style: none;
   box-shadow: 0.1rem 0.2rem rgb(16, 16, 16);
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
-.colored-button:hover {
+.colored-button:disabled {
+  filter: grayscale(80%) brightness(80%);
+  box-shadow: none;
+}
+
+.colored-button:enabled:hover {
   filter: brightness(115%);
 }
 
-.colored-button:active {
+.colored-button:enabled:active {
   filter: brightness(75%);
   box-shadow: 0.05rem 0.1rem rgb(16, 16, 16);
   transform: translate(0.05rem, 0.1rem);
@@ -46,7 +55,7 @@ input[type="text"] {
   border-style: none;
   padding: 0.5rem;
   box-shadow: 0.1rem 0.1rem rgb(16, 16, 16);
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .form-row {
@@ -55,4 +64,10 @@ input[type="text"] {
 
 #gif-container {
   margin: 2rem;
+}
+
+.gif-image {
+  display: block;
+  margin: 1rem auto;
+  max-width: 90%;
 }

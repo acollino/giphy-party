@@ -11,8 +11,6 @@ const giphyKey = "Y6rG8VJyAwsgpZectHkvEPGN99o9J4oG";
    by Giphy for any abuses.
 */
 
-searchBar.setCustomValidity("No unique Gifs found for this term!");
-
 async function makeGiphyRequest(searchItem) {
   try {
     let giphyResponse = await axios.get(
@@ -21,67 +19,53 @@ async function makeGiphyRequest(searchItem) {
         params: { tag: searchItem, api_key: giphyKey, rating: "pg-13" },
       }
     );
-    giphyResponse = await checkForUniqueGif(giphyResponse);
-    return giphyResponse;
+    return checkForUniqueGif(giphyResponse);
   } catch (error) {
     console.log(error);
   }
 }
 
 async function checkForUniqueGif(gif) {
-  let gifInfo = gif;
-  if (gifIDSet.has(gifInfo.data.data.id)) {
-    gifInfo = await axios.get("https://api.giphy.com/v1/gifs/random", {
-      params: { tag: searchItem, api_key: giphyKey, rating: "pg-13" },
-    });
-  }
-  if (gifIDSet.has(gifInfo.data.data.id) || gifInfo.data.data.length === 0) {
+  if (gif.data.data.length === 0) {
+    searchBar.setCustomValidity("No gifs found for this search!");
     searchBar.reportValidity();
-    gifInfo = null;
-  } else {
-    gifIDSet.add(gif.data.data.id);
+    return null;
   }
-  return gifInfo;
+  if (gifIDSet.has(gif.data.data.id)) {
+    searchBar.setCustomValidity("GIPHY sent a duplicate gif!");
+    searchBar.reportValidity();
+    return null;
+  }
+  gifIDSet.add(gif.data.data.id);
+  return gif;
 }
 
 searchBar.addEventListener("input", function (evt) {
   searchBar.setCustomValidity("");
 });
 
-submit.addEventListener("click", submitInfoToGiphy);
-
-clearGifButton.addEventListener("click", function (evt) {
-  gifContainer.textContent = "";
-  searchBar.value = "";
-  gifIDSet.clear();
-});
-
-function checkInputs() {
-  return Boolean(searchBar.value);
-}
-
-async function addRandomGif(gifInfo) {
-  let gif = document.createElement("img");
-  gif.src = gifInfo.images.original.url;
-  gifContainer.append(gif);
-}
-
-async function submitInfoToGiphy(evt) {
+submit.addEventListener("click", async function (evt) {
   evt.preventDefault();
-  if (checkInputs()) {
+  let checkInputs = Boolean(searchBar.value);
+  if (checkInputs) {
     let gifInfo = await makeGiphyRequest(searchBar.value, giphyKey);
     if (gifInfo) {
       addRandomGif(gifInfo.data.data);
     }
   }
+});
+
+clearGifButton.addEventListener("click", function (evt) {
+  gifContainer.textContent = "";
+  searchBar.value = "";
+  gifIDSet.clear();
+  clearGifButton.disabled = true;
+});
+
+async function addRandomGif(gifInfo) {
+  let gif = document.createElement("img");
+  gif.src = gifInfo.images.original.url;
+  gif.classList.add("gif-image");
+  gifContainer.prepend(gif);
+  clearGifButton.disabled = false;
 }
-
-function resizeContent() {
-  let windowSize = Math.min(window.screen.availWidth, window.innerWidth);
-  let newSize = 14 + 60000000 / (1 + (windowSize * 3715) ** 1.03);
-  document.querySelector("html").style.fontSize = newSize + "px";
-}
-
-document.addEventListener("DOMContentLoaded", resizeContent);
-
-window.addEventListener("resize", resizeContent);
