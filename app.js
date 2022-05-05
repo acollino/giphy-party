@@ -69,13 +69,3 @@ async function addRandomGif(gifInfo) {
   gifContainer.prepend(gif);
   clearGifButton.disabled = false;
 }
-
-function resizeContent() {
-  let windowSize = Math.min(window.screen.availWidth, window.innerWidth);
-  let newSize = 14 + 60000000 / (1 + (windowSize * 3715) ** 1.03);
-  document.querySelector("html").style.fontSize = newSize + "px";
-}
-
-document.addEventListener("DOMContentLoaded", resizeContent);
-
-window.addEventListener("resize", resizeContent);
