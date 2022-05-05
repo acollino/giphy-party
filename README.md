@@ -1,7 +1,7 @@
 GIPHY Party is a browser app that allows you to browse GIPHY's vast gif library for any images you might be searching for!
 
 The app will pull a random gif that fits your search every time, except:
-- If you've somehow run GIPHY out of gifs.
+- If GIPHY sends a duplicate gif.
 - If your search returned no results.
 
 In these cases, the app will let you know. Give it a try here: https://acollino.github.io/giphy-party/
