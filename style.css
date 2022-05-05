@@ -69,4 +69,5 @@ input[type="text"] {
 .gif-image {
   display: block;
   margin: 1rem auto;
+  max-width: 90%;
 }
